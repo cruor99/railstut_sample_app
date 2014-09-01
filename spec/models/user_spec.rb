@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe User, :type => :model do
   before do
-    @user = User.new(name:"Example User", email:"user@example.com", password:"a"*7, password_confirmation:"a"*7)
+    @user = User.new(name:"Example User", email:"user@example.com", password:"foobar", password_confirmation:"foobar")
   end
   subject{@user}
   it{should respond_to(:name)}
@@ -10,6 +10,7 @@ RSpec.describe User, :type => :model do
   it{should respond_to(:password_digest)}
   it{should respond_to(:password)}
   it{should respond_to(:password_confirmation)}
+  it{should respond_to(:remember_token)}
   it{should respond_to(:authenticate)}
   it {should be_valid}
   describe "when name is not present" do
@@ -69,6 +70,10 @@ RSpec.describe User, :type => :model do
     describe "with valid password" do
       it{should eq found_user.authenticate(@user.password)}
     end
+  end
+  describe "remember token" do
+    before{@user.save}
+    its(:remember_token){should_not be_blank}
   end
 end
 
