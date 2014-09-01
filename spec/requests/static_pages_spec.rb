@@ -22,10 +22,6 @@ RSpec.describe "StaticPages", :type => :request do
      end
    end
    describe 'About Page' do
-     it "should have the content 'About us'" do
-       visit about_path
-       expect(page).to have_content('About Us')
-     end
      it "should have the title 'About Us'" do
        visit about_path 
        expect(page).to have_title('Ruby on Rails Tutorial Sample App | About Us')

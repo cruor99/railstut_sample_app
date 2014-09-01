@@ -29,6 +29,7 @@ gem 'jbuilder', '~> 1.2'
 
 group :development , :test do
   gem 'guard-rspec'
+  gem 'factory_girl_rails'
   gem 'rspec-rails'
 end
 
