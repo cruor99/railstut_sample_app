@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe User, :type => :model do
   before do
-    @user = User.new(name:"Example User", email:"user@example.com")
+    @user = User.new(name:"Example User", email:"user@example.com", password:"a"*7, password_confirmation:"a"*7)
   end
   subject{@user}
   it{should respond_to(:name)}
@@ -67,12 +67,7 @@ RSpec.describe User, :type => :model do
     before{@user.save}
     let(:found_user ){User.find_by(email:@user.email)}
     describe "with valid password" do
-      it{shouldeq found_user.authenticate(@user.password)}
-    end
-    describe"with invalid password" do
-      let(:user_for_invalid_password ){found_user.authenticate("invalid" )}
-      it{should_noteq user_for_invalid_password}
-      specify{expect(user_for_invalid_password).to be_False}
+      it{should eq found_user.authenticate(@user.password)}
     end
   end
 end
